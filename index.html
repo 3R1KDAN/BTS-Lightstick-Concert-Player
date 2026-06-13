@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>BTS V4 BLE</title>
+</head>
+<body>
+    <div class="mainContainer">
+        <div class="subContainer">
+            <div class="buttonContainer">
+                <h3>Conection Buttons</h3>
+                <button id="connect">Conectar ARMY BOMB V4</button>
+                <button id="connect-led">Conectar Tira LED</button>
+                <h3>Color Picker</h3>
+                <input id="rgbColorPicker" type="color">
+                <h3>Power</h3>
+                <div class="slideContainer">
+                    <label for="opacityController" id="slideLabel">100%</label>
+                    <input type="range" min="0" max="100" value="100" id="opacityController">
+                </div>
+            </div>
+            <div class="logContainer" id="logContainer">
+                <h3 style="padding-left: 20px;">LOG's</h3>
+            </div>
+        </div>
+
+        <div class="videoContainer">
+            <div>
+                <h1>Color actual</h1>
+                <div class="colorViewer" id="colorViewer"></div>
+            </div>
+            <video id="videoPlayer" controls src="./video/[RAW] 260418 AREE RAYNG JAYP D332.mp4"></video>
+            <h1>Event Timer</h1>
+            <h1 class="eventText" id="eventText">No event</h1>
+            <h2 id="timerText">00:00</h2>
+        </div>
+    </div>
+
+
+
+    <script type="module" src="./controller.js"></script>
+    <link rel="stylesheet" href="./style.css">
+</body>
+</html>
