@@ -5,6 +5,8 @@ import TurnOn from './tracks/defaults/Turn on.json' with { type: 'json' };
 //TURN OFF
 import TurnOff from './tracks/defaults/Turn off.json' with { type: 'json' };
 
+import animationTest from './tracks/animationV2_test.json' with { type: 'json'};
+
 //TRACK
 //INTRO
 import Intro from './tracks/00 - Intro.json' with { type: 'json' };
@@ -374,6 +376,11 @@ function evaluarTiempoDelListener(tiempo) {
       currentTrackPlayer.play();
       trackInformation.innerHTML = "Turning On";
   }
+  if (tiempo === "00:15") {
+      currentTrackPlayer = new TrackPlayer(animationTest);
+      currentTrackPlayer.play();
+      trackInformation.innerHTML = "Animation V2";
+  }
   if (tiempo === "15:56") {
       currentTrackPlayer = new TrackPlayer(TurnOff);
       currentTrackPlayer.play();
@@ -439,56 +446,61 @@ animationLoop();
     const playlist = [];
     const startTime = performance.now();
 
-    let lastPacket = "";
+    let lastColor = "";
 
-    function savePacket(uuid, data) {
+    function parseRGB(rgbString) {
 
-        const bytes = Array.from(new Uint8Array(data));
-        const signature = `${uuid}:${JSON.stringify(bytes)}`;
+        const match = rgbString.match(
+            /rgb\s*\(\s*(\d+),\s*(\d+),\s*(\d+)\s*\)/
+        );
 
-        // Ignorar duplicados consecutivos
-        if (signature === lastPacket) return;
+        if (!match) return null;
 
-        lastPacket = signature;
+        return [
+            parseInt(match[1]),
+            parseInt(match[2]),
+            parseInt(match[3])
+        ];
+    }
+
+    function captureColor() {
+
+        const colorBulk =
+            document.getElementById("colorBulk");
+
+        if (!colorBulk) return;
+
+        const rgb =
+            colorBulk.style.backgroundColor;
+
+        if (!rgb) return;
+
+        if (rgb === lastColor) return;
+
+        lastColor = rgb;
+
+        const values = parseRGB(rgb);
+
+        if (!values) return;
 
         playlist.push({
-            time: Math.round(performance.now() - startTime),
-            uuid,
-            data: bytes
+            time: Math.round(
+                performance.now() - startTime
+            ),
+            uuid:
+                "0001ff01-0000-1000-8000-00805f9800c4",
+            data: [
+                values[0],
+                values[1],
+                values[2],
+                1
+            ]
         });
     }
 
-    // Hook writeValue()
-    if (BluetoothRemoteGATTCharacteristic.prototype.writeValue) {
+    const captureInterval =
+        setInterval(captureColor, 10);
 
-        const originalWrite =
-            BluetoothRemoteGATTCharacteristic.prototype.writeValue;
-
-        BluetoothRemoteGATTCharacteristic.prototype.writeValue =
-        async function(data) {
-
-            savePacket(this.uuid, data);
-
-            return originalWrite.call(this, data);
-        };
-    }
-
-    // Hook writeValueWithoutResponse()
-    if (BluetoothRemoteGATTCharacteristic.prototype.writeValueWithoutResponse) {
-
-        const originalWriteNoResp =
-            BluetoothRemoteGATTCharacteristic.prototype.writeValueWithoutResponse;
-
-        BluetoothRemoteGATTCharacteristic.prototype.writeValueWithoutResponse =
-        async function(data) {
-
-            savePacket(this.uuid, data);
-
-            return originalWriteNoResp.call(this, data);
-        };
-    }
-
-    // Estado global
     window.BLERecorder = {
 
         getData() {
@@ -496,35 +508,65 @@ animationLoop();
         },
 
         clear() {
+
             playlist.length = 0;
-            console.log("Captura limpiada");
+            lastColor = "";
+
+            console.log(
+                "Captura limpiada"
+            );
         },
 
-        download(filename = "ble_playlist.json") {
+        stop() {
 
-            const blob = new Blob(
-                [JSON.stringify(playlist, null, 2)],
-                { type: "application/json" }
+            clearInterval(
+                captureInterval
             );
 
-            const a = document.createElement("a");
-            a.href = URL.createObjectURL(blob);
-            a.download = filename;
+            console.log(
+                "Captura detenida"
+            );
+        },
+
+        download(
+            filename =
+            "color_playlist.json"
+        ) {
+
+            const blob = new Blob(
+                [
+                    JSON.stringify(
+                        playlist,
+                        null,
+                        2
+                    )
+                ],
+                {
+                    type:
+                    "application/json"
+                }
+            );
+
+            const a =
+                document.createElement("a");
+
+            a.href =
+                URL.createObjectURL(blob);
+
+            a.download =
+                filename;
+
             a.click();
 
-            URL.revokeObjectURL(a.href);
+            URL.revokeObjectURL(
+                a.href
+            );
         }
-
     };
 
-    setInterval(() => {
-        console.log(`BLE capturados: ${playlist.length}`);
-    }, 5000);
-
-    console.log("BLE Recorder iniciado");
-    console.log("Descargar: BLERecorder.download()");
-    console.log("Ver datos: BLERecorder.getData()");
-    console.log("Limpiar: BLERecorder.clear()");
+    console.log(
+        "Color Recorder iniciado"
+    );
 
 })();
 
