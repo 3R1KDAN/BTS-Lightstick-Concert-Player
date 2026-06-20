@@ -29,6 +29,18 @@ import likeAnimalsFakeLove from './tracks/05 - Like animals + Fake Love.json' wi
 //06 INTRO + SWIM
 import swim from './tracks/06 - Intro + Swim.json' with { type: 'json' };
 
+//07 INTRO + SWIM
+import merryGoRound from './tracks/07 - Intro + Merry Go Round + Outro.json' with { type: 'json' };
+
+//08 2.0
+import twoPointO from './tracks/08 - 2.0.json' with { type: 'json' };
+
+//09 NORMAL
+import normal from './tracks/09 - NORMAL.json' with { type: 'json' };
+
+//10 Not Today
+import notToday from './tracks/10 - Not Today.json' with { type: 'json' };
+
 
 
 
@@ -311,7 +323,7 @@ async function bleLoop() {
         }
 
         await new Promise(
-            r => setTimeout(r, 15)
+            r => setTimeout(r, 30)
         );
     }
 }
@@ -381,7 +393,7 @@ function evaluarTiempoDelListener(tiempo) {
       currentTrackPlayer.play();
       trackInformation.innerHTML = "Animation V2";
   }
-  if (tiempo === "15:56") {
+  if (tiempo === "15:57") {
       currentTrackPlayer = new TrackPlayer(TurnOff);
       currentTrackPlayer.play();
       trackInformation.innerHTML = "Turning Off";
@@ -405,7 +417,7 @@ function evaluarTiempoDelListener(tiempo) {
         currentTrackPlayer = new TrackPlayer(Aliens);
         currentTrackPlayer.play();
         trackInformation.innerHTML = "Aliens";
-        }, 100);
+        }, 50);
   }
   if (tiempo === "23:50") {
       currentTrackPlayer = new TrackPlayer(runBts);
@@ -426,12 +438,40 @@ function evaluarTiempoDelListener(tiempo) {
         trackInformation.innerHTML = "Like animals + Fake Love";
         }, 600);
   }
-  if (tiempo === "40:58") {
+  if (tiempo === "40:59") {
       setTimeout(() => {
         currentTrackPlayer = new TrackPlayer(swim);
         currentTrackPlayer.play();
         trackInformation.innerHTML = "Intro + Swim";
-        }, 500);
+        }, 650);
+  }
+  if (tiempo === "44:49") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(merryGoRound);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Intro + Merry Go Round + Outro";
+        }, 300);
+  }
+  if (tiempo === "62:07") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(twoPointO);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "2.0";
+        }, 550);
+  }
+  if (tiempo === "65:02") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(normal);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "NORMAL";
+        }, 100);
+  }
+  if (tiempo === "70:22") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(notToday);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Not Today";
+        }, 0);
   }
 }
 
