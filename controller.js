@@ -41,6 +41,14 @@ import normal from './tracks/09 - NORMAL.json' with { type: 'json' };
 //10 Not Today
 import notToday from './tracks/10 - Not Today.json' with { type: 'json' };
 
+//11 MIC DROP + FYA + FIRE
+import micDropFyaFire from './tracks/11 - MIC DROP + FYA + FIRE.json' with { type: 'json' };
+
+//12 - BODY TO BODY
+import bodyToBody from './tracks/12 - Body to body.json' with { type: 'json' };
+
+//13 - IDOL + MARCHING STADIUM
+import idol from './tracks/13 - IDOL + Marching Stadium.json' with { type: 'json' };
 
 
 
@@ -323,7 +331,7 @@ async function bleLoop() {
         }
 
         await new Promise(
-            r => setTimeout(r, 30)
+            r => setTimeout(r, 15)
         );
     }
 }
@@ -457,21 +465,42 @@ function evaluarTiempoDelListener(tiempo) {
         currentTrackPlayer = new TrackPlayer(twoPointO);
         currentTrackPlayer.play();
         trackInformation.innerHTML = "2.0";
-        }, 550);
+        }, 250);
   }
-  if (tiempo === "65:02") {
+  if (tiempo === "65:01") {
       setTimeout(() => {
         currentTrackPlayer = new TrackPlayer(normal);
         currentTrackPlayer.play();
         trackInformation.innerHTML = "NORMAL";
-        }, 100);
+        }, 800);
   }
-  if (tiempo === "70:22") {
+  if (tiempo === "70:21") {
       setTimeout(() => {
         currentTrackPlayer = new TrackPlayer(notToday);
         currentTrackPlayer.play();
         trackInformation.innerHTML = "Not Today";
+        }, 600);
+  }
+  if (tiempo === "73:59") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(micDropFyaFire);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "MIC DROP + FYA + FIRE";
         }, 0);
+  }
+  if (tiempo === "85:08") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(bodyToBody);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Body to Body";
+        }, 600);
+  }
+  if (tiempo === "88:27") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(idol);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "IDOL + Marching Stadium";
+        }, 500);
   }
 }
 
