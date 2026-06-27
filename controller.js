@@ -1,11 +1,14 @@
 //DEFAULTS
-//TURN ON
 import TurnOn from './tracks/defaults/Turn on.json' with { type: 'json' };
-
-//TURN OFF
 import TurnOff from './tracks/defaults/Turn off.json' with { type: 'json' };
+import boraOn from './tracks/defaults/Bora on.json' with { type: 'json'};
+import boraOff from './tracks/defaults/Bora off.json' with { type: 'json'};
+import boraBlink from './tracks/defaults/Bora blink.json' with { type: 'json'};
+import whiteToBora from './tracks/defaults/White to Bora.json' with { type: 'json'};
+import aquaTrans from './tracks/defaults/Aqua trans.json' with { type: 'json'};
 
-import animationTest from './tracks/animationV2_test.json' with { type: 'json'};
+
+
 
 //TRACK
 //INTRO
@@ -49,6 +52,21 @@ import bodyToBody from './tracks/12 - Body to body.json' with { type: 'json' };
 
 //13 - IDOL + MARCHING STADIUM
 import idol from './tracks/13 - IDOL + Marching Stadium.json' with { type: 'json' };
+
+//14 - COME OVER
+import comeOver from './tracks/14 - Come Over.json' with { type: 'json' };
+
+//15 - BUTTER
+import butter from './tracks/15 - Butter.json' with { type: 'json' };
+
+//16 - DYNAMITE
+import dynamite from './tracks/16 - Dynamite.json' with { type: 'json' };
+
+//17 - PLEASE
+import please from './tracks/17 - Please.json' with { type: 'json' };
+
+//18 - INTO THE SUN + OUTRO
+import intoTheSun from './tracks/18 - Into The Sun + Outro.json' with { type: 'json' };
 
 
 
@@ -211,7 +229,7 @@ document.getElementById("connect").onclick = async () => {
 
         card.appendChild(errorLog);
         logContainer.appendChild(card);
-
+        sendRGB(66, 0, 255, mode = 1);
     } catch (err) {
         //log("ERROR ARMY BOMB: " + err);
         var card = document.createElement("div");
@@ -396,11 +414,6 @@ function evaluarTiempoDelListener(tiempo) {
       currentTrackPlayer.play();
       trackInformation.innerHTML = "Turning On";
   }
-  if (tiempo === "00:15") {
-      currentTrackPlayer = new TrackPlayer(animationTest);
-      currentTrackPlayer.play();
-      trackInformation.innerHTML = "Animation V2";
-  }
   if (tiempo === "15:57") {
       currentTrackPlayer = new TrackPlayer(TurnOff);
       currentTrackPlayer.play();
@@ -431,6 +444,27 @@ function evaluarTiempoDelListener(tiempo) {
       currentTrackPlayer = new TrackPlayer(runBts);
       currentTrackPlayer.play();
       trackInformation.innerHTML = "Run BTS";
+  }
+  if (tiempo === "27:19") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(boraOn);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Bora On";
+        }, 0);
+  }
+  if (tiempo === "30:19") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(boraBlink);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Bora Blink";
+        }, 0);
+  }
+  if (tiempo === "30:49") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(boraOff);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Bora Off";
+        }, 0);
   }
   if (tiempo === "30:53") {
       setTimeout(() => {
@@ -474,6 +508,20 @@ function evaluarTiempoDelListener(tiempo) {
         trackInformation.innerHTML = "NORMAL";
         }, 800);
   }
+  if (tiempo === "68:10") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(boraOn);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Bora On";
+        }, 0);
+  }
+  if (tiempo === "70:18") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(boraOff);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Bora Off";
+        }, 0);
+  }
   if (tiempo === "70:21") {
       setTimeout(() => {
         currentTrackPlayer = new TrackPlayer(notToday);
@@ -502,7 +550,78 @@ function evaluarTiempoDelListener(tiempo) {
         trackInformation.innerHTML = "IDOL + Marching Stadium";
         }, 500);
   }
+  if (tiempo === "97:00") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(TurnOn);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Turning On";
+        }, 0);
+  }
+  if (tiempo === "105:45") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(aquaTrans);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "VCR Transition 1";
+        }, 0);
+  }
+  if (tiempo === "107:22") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(comeOver);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Come Over";
+        }, 700);
+  }
+  if (tiempo === "111:08") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(boraOn);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Bora On";
+        }, 0);
+  }
+  if (tiempo === "112:53") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(butter);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Butter";
+        }, 800);
+  }
+  if (tiempo === "115:45") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(dynamite);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Dynamite";
+        }, 0);
+  }
+  if (tiempo === "119:08") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(whiteToBora);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Bora On";
+        }, 0);
+  }
+  if (tiempo === "143:09") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(please);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Please";
+        }, 300);
+  }
+  if (tiempo === "146:06") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(intoTheSun);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Into The Sun + Outro";
+        }, 800);
+  }
+  if (tiempo === "152:19") {
+      setTimeout(() => {
+        currentTrackPlayer = new TrackPlayer(whiteToBora);
+        currentTrackPlayer.play();
+        trackInformation.innerHTML = "Bora On";
+        }, 0);
+  }
 }
+
 
 
 bleLoop();
